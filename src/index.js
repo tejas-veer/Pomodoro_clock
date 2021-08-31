@@ -192,9 +192,12 @@ class App extends React.Component{
     }
 
     return(
+      
       <div className="pomodoro-container">
-
-        <div className="clock-container">
+         <div className="navbar">
+           POMO clock
+         </div>
+        <div className="cl  ock-container">
           <h1>{currentState}</h1>
           <span>{this.convertToTime(currentTime)}</span>
           <div className="flex "> 
