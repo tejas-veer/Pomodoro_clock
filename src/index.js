@@ -3,221 +3,225 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 
-class App extends React.Component{
+class App extends React.Component {
 
-  constructor(property){
+  constructor(property) {
     super(property);
     this.loop = undefined;
   }
 
   state = {
-   bcount : 5,
-   scount  : 25 ,
-   currentState : 'Session',
-   currentTime : 1*60,
-   isPlaying : false,
-   loop : undefined
+    bcount: 10,
+    scount: 45,
+    currentState: 'Session',
+    currentTime: 45 * 60,
+    isPlaying: false,
+    loop: undefined
   }
 
-  decreaseBreak = () =>{
-    const {bcount,currentState,currentTime,isPlaying} = this.state;
+  decreaseBreak = () => {
+    const { bcount, currentState, currentTime, isPlaying } = this.state;
 
-    if(bcount > 0)
-    { 
-      if(isPlaying == false && currentState == 'Break')
-      { 
+    if (bcount > 0) {
+      if (isPlaying == false && currentState == 'Break') {
         this.setState({
-          bcount : bcount - 1,
-          currentTime : (bcount -1)*60 
+          bcount: bcount - 1,
+          currentTime: (bcount - 1) * 60
         })
       }
-      else{ 
+      else {
         this.setState({
-          bcount : bcount - 1
+          bcount: bcount - 1
         })
       }
-  }
- 
+    }
+
   }
 
-  increaseBreak = () =>{
-    const {bcount,currentState,currentTime,isPlaying} = this.state;
-    if(bcount <= 59)
-    { 
-      if(isPlaying == false && currentState == 'Break')
-      {
+  increaseBreak = () => {
+    const { bcount, currentState, currentTime, isPlaying } = this.state;
+    if (bcount <= 59) {
+      if (isPlaying == false && currentState == 'Break') {
         this.setState({
-          bcount : bcount + 1,
-          currentTime : (bcount + 1)*60 
+          bcount: bcount + 1,
+          currentTime: (bcount + 1) * 60
         })
       }
-      else{ 
-    this.setState({
-      bcount : bcount + 1,
-    })
-  }
-   
-  }
-  }
-
-  decreaseSession = () =>{
-    const {scount,currentState,currentTime,isPlaying} = this.state;
-    if(scount > 0){ 
-      if(isPlaying == false && currentState == 'Session')
-      {      this.setState({
-          scount : scount - 1,
-          currentTime : (scount - 1)*60
-        })
-      }
-    else{ 
-      this.setState({
-        scount : scount - 1
-      })
-  }
-  }
-  }
-
-  increasSession = () =>{
-    const {scount,currentState,currentTime,isPlaying} = this.state;
-    if(scount <= 59 )
-    { 
-      if(isPlaying == false && currentState == 'Session')
-      {
+      else {
         this.setState({
-          scount : scount + 1,
-          currentTime : (scount + 1)*60
+          bcount: bcount + 1,
         })
       }
-      else{ 
+
+    }
+  }
+
+  decreaseSession = () => {
+    const { scount, currentState, currentTime, isPlaying } = this.state;
+    if (scount > 0) {
+      if (isPlaying == false && currentState == 'Session') {
         this.setState({
-          scount : scount + 1
+          scount: scount - 1,
+          currentTime: (scount - 1) * 60
         })
       }
-   
-  }
+      else {
+        this.setState({
+          scount: scount - 1
+        })
+      }
+    }
   }
 
-  start = () => { 
-    const {isPlaying} = this.state;
+  increasSession = () => {
+    const { scount, currentState, currentTime, isPlaying } = this.state;
+    if (scount <= 59) {
+      if (isPlaying == false && currentState == 'Session') {
+        this.setState({
+          scount: scount + 1,
+          currentTime: (scount + 1) * 60
+        })
+      }
+      else {
+        this.setState({
+          scount: scount + 1
+        })
+      }
 
-    if(isPlaying)
-    {
+    }
+  }
+
+  start = () => {
+    const { isPlaying } = this.state;
+
+    if (isPlaying) {
       clearInterval(this.loop);
       this.setState({
-        isPlaying : false
+        isPlaying: false
       })
     }
-    else{
+    else {
       this.setState({
-        isPlaying : true
+        isPlaying: true
       })
       this.loop = setInterval(() => {
-        const {currentTime , currentState , bcount , scount} = this.state;
-          if(currentTime <= 0)
-          {
-            this.setState({
-              currentState : (currentState == 'Session') ? 'Break' : 'Session',
-              currentTime : (currentState == 'Session') ? bcount*60 : scount*60
-            })
-          }
-          else{ 
-              this.setState(
-                {
-                  currentTime : currentTime-1
-                }
-              )
-          }
-      },1000);
+        const { currentTime, currentState, bcount, scount } = this.state;
+        if (currentTime <= 0) {
+          this.setState({
+            currentState: (currentState == 'Session') ? 'Break' : 'Session',
+            currentTime: (currentState == 'Session') ? bcount * 60 : scount * 60
+          })
+        }
+        else {
+          this.setState(
+            {
+              currentTime: currentTime - 1
+            }
+          )
+        }
+      }, 1000);
     }
 
-  } 
+  }
 
-  reset = () => {
-    const {currentState , currentTime , scount , bcount , isPlaying ,loop} = this.state;
+  changeSession = () => {
+    const { currentState, currentTime, scount, bcount, isPlaying, loop } = this.state;
 
     clearInterval(this.loop);
     this.setState({
-      currentState : 'Session',
-      currentTime : scount*60  ,  
-      isPlaying : false
+      currentState: (currentState == 'Session') ? 'Break' : 'Session',
+      currentTime: (currentState == 'Session') ? bcount * 60 : scount * 60,
+      isPlaying: false
     })
   }
 
-  convertToTime = (count) =>{
-    let minutes = Math.floor(count/60);
-    let seconds = count%60;
+  reset = () => {
+    const { currentState, currentTime, scount, bcount, isPlaying, loop } = this.state;
 
-    if (seconds < 10)
-    {
+    clearInterval(this.loop);
+    this.setState({
+      currentState: 'Session',
+      currentTime: scount * 60,
+      isPlaying: false
+    })
+  }
+
+  convertToTime = (count) => {
+    let minutes = Math.floor(count / 60);
+    let seconds = count % 60;
+
+    if (seconds < 10) {
       seconds = '0' + seconds;
     }
-    
-    if (minutes < 10)
-    {
+
+    if (minutes < 10) {
       minutes = '0' + minutes;
     }
 
     return `${minutes}:${seconds}`;
-}
- 
+  }
+
   startORstop = () => {
-    const {isPlaying} = this.state;
-    if(isPlaying)
-    {
+    const { isPlaying } = this.state;
+    if (isPlaying) {
       return 'Stop'
     }
-    else
-    {
+    else {
       return 'Start'
     }
   }
-  render()
-  {
-    const {bcount , 
-      scount , 
-      currentState , 
+
+  changeSessionName = () => {
+    const { currentState } = this.state;
+    return (currentState == 'Session') ? 'Take Break' : 'Take Session'
+  }
+
+
+  render() {
+    const { bcount,
+      scount,
+      currentState,
       currentTime
     } = this.state;
     const propertyBreak = {
-      title : 'Break Time',
-      count : bcount,
-      decrease : this.decreaseBreak,
-      increase : this.increaseBreak
+      title: 'Break Time',
+      count: bcount,
+      decrease: this.decreaseBreak,
+      increase: this.increaseBreak
     }
     const propertySession = {
-      title : 'Pomodoro Time',
-      count : scount,
-      decrease : this.decreaseSession,
-      increase : this.increasSession
+      title: 'Pomodoro Time',
+      count: scount,
+      decrease: this.decreaseSession,
+      increase: this.increasSession
     }
 
-    return(
-      
+    return (
       <div className="pomodoro-container">
-         <div className="navbar">
-           POMO clock
-         </div>
-        <div className="cl  ock-container">
+        {/* <nav id="navbar">Focus Clock</nav> */}
+        <div className="clock-container">
           <h1>{currentState}</h1>
           <span>{this.convertToTime(currentTime)}</span>
-          <div className="flex "> 
-            <button onClick={this.start}>{this.startORstop()}</button>
-            <button onClick={this.reset}>Reset</button>
-          </div>
         </div>
-      <div className="action-container flex">
-        <SetTimer {...propertyBreak}/>
-        <SetTimer {...propertySession}/>
-      </div>
+        <div className="clock-btn ">
+          <button onClick={this.start} >{this.startORstop()}</button>
+          <button onClick={this.reset}>Reset</button>
+        </div>
+        <button id='chg-btn' className="flex" onClick={this.changeSession} >{this.changeSessionName()}</button>
+        <div className="action-container ">
+          <SetTimer {...propertyBreak} />
+          <SetTimer {...propertySession} />
+        </div>
       </div>
     )
   }
-} 
- 
-const SetTimer = (property) =>(
+}
+
+
+const SetTimer = (property) => (
   <div className='timer-container'>
     <h1>{property.title}</h1>
-    <div className="flex action-btn"> 
+    <div className="action-btn">
       <button onClick={property.decrease}>-</button>
       <span>{property.count}</span>
       <button onClick={property.increase}>+</button>
@@ -225,7 +229,8 @@ const SetTimer = (property) =>(
   </div>
 )
 ReactDOM.render(
-    <App />,
+  <App />,
   document.getElementById('root')
 );
+
 
