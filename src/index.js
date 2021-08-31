@@ -198,7 +198,7 @@ class App extends React.Component {
 
     return (
       <div className="pomodoro-container">
-        {/* <nav id="navbar">Focus Clock</nav> */}
+        {/* <nav id="navbar"><span><img src="https://cdn.pixabay.com/photo/2017/11/10/13/32/clock-2936333_1280.png"></img></span>Focus Clock</nav> */}
         <div className="clock-container">
           <h1>{currentState}</h1>
           <span>{this.convertToTime(currentTime)}</span>

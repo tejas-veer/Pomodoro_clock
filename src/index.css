@@ -14,15 +14,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* padding-top: 60px; */
 }
 
-#navbar {
-  height: 60px;
+/* #navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 20px;
+  font-weight: bold;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: rgb(107, 0, 0);
+  align-items: flex-start;
+  padding-left: 40px;
+  flex-direction: column;
+  width: 100%;
+  background-color: teal;
 }
+#navbar img {
+  width: 60px;
+} */
 .flex {
   display: flex;
   justify-content: center;
@@ -57,7 +68,7 @@ body {
 .action-btn span {
   font-size: 30px;
   margin: 0 10px;
-  width: 50px;
+  width: 80px;
   text-align: center;
 }
 .action-btn button {
@@ -82,7 +93,7 @@ body {
   flex-direction: column;
   margin: 10px auto;
   width: 200px;
-  height: 200px;
+  height: 190px;
 }
 
 .clock-container h1 {
@@ -107,7 +118,7 @@ body {
   color: white;
   background-color: transparent;
   font-size: 20px;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 40px;
   cursor: pointer;
 }
@@ -119,7 +130,7 @@ body {
   color: white;
   background-color: transparent;
   font-size: 20px;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 50px;
   cursor: pointer;
 }
@@ -127,5 +138,38 @@ button:hover {
   box-shadow: 0px 0px 10px rgb(178 0 255);
 }
 
-@media screen {
+@media screen and (max-width: 630px) and (min-width: 400px) {
+  body {
+    background-color: rgb(0, 255, 115);
+  }
+
+  .action-container {
+    flex-direction: column;
+    width: 450px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .action-btn {
+    margin: 0 10px;
+  }
+}
+@media screen and (max-width: 450px) {
+  body {
+    background-color: rgb(255, 57, 57);
+  }
+
+  .action-container {
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .clock-btn button {
+    width: 130px;
+  }
+  #chg-btn {
+    width: 275px;
+  }
 }
