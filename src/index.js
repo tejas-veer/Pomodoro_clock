@@ -99,6 +99,7 @@ class App1 extends React.Component {
     const { isPlaying } = this.state;
 
     if (isPlaying) {
+      document.body.style.backgroundColor = 'red'
       clearInterval(this.loop);
       this.setState({
         isPlaying: false
@@ -108,6 +109,7 @@ class App1 extends React.Component {
       this.setState({
         isPlaying: true
       })
+      document.body.style.backgroundColor = 'green'
       this.loop = setInterval(() => {
         const { currentTime, currentState, bcount, scount } = this.state;
         if (currentTime <= 0) {
@@ -141,11 +143,13 @@ class App1 extends React.Component {
 
   reset = () => {
     const { currentState, currentTime, scount, bcount, isPlaying, loop } = this.state;
-
+    document.body.style.backgroundColor = '#ff4757'
     clearInterval(this.loop);
     this.setState({
       currentState: 'Session',
       currentTime: scount * 60,
+      // currentState: (currentState === 'Session') ? 'Session' : 'Break',
+      // currentTime: (currentState === 'Session') ? scount * 60 : bcount * 60,
       isPlaying: false
     })
   }
@@ -209,7 +213,7 @@ class App1 extends React.Component {
     return (
       <div className="pomodoro-container">
         {/* <nav id="navbar"><span><img src="https://cdn.pixabay.com/photo/2017/11/10/13/32/clock-2936333_1280.png"></img></span>Focus Clock</nav> */}
-        <div className="clock-container" style={{ background: this.state.isPlaying ? 'green' : 'red' }}>
+        <div className="clock-container" style={{ boxShadow: this.state.isPlaying ? '0px 0px 50px gray' : '0px 0px 0px gray' }}>
           <h1>{currentState}</h1>
           <span>{this.convertToTime(currentTime)}</span>
         </div>

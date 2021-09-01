@@ -42,7 +42,7 @@ body {
 
 .action-container {
   /* margin: 20px; */
-  border: 2px solid white;
+  /* border: 2px solid white; */
   border-radius: 80px;
   display: flex;
   justify-content: center;
