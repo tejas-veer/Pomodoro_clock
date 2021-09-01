@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
+import App from './App';
 
-class App extends React.Component {
+class App1 extends React.Component {
 
   constructor(property) {
     super(property);
@@ -199,7 +199,7 @@ class App extends React.Component {
     return (
       <div className="pomodoro-container">
         {/* <nav id="navbar"><span><img src="https://cdn.pixabay.com/photo/2017/11/10/13/32/clock-2936333_1280.png"></img></span>Focus Clock</nav> */}
-        <div className="clock-container">
+        <div className="clock-container" >
           <h1>{currentState}</h1>
           <span>{this.convertToTime(currentTime)}</span>
         </div>
@@ -229,7 +229,7 @@ const SetTimer = (property) => (
   </div>
 )
 ReactDOM.render(
-  <App />,
+  <App1 />,
   document.getElementById('root')
 );
 
