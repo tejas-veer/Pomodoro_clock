@@ -99,6 +99,13 @@ class App1 extends React.Component {
   start = () => {
     const { isPlaying } = this.state;
 
+    var video = document.getElementById("myVideo");
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+
     if (isPlaying) {
       document.body.style.backgroundColor = 'red'
       clearInterval(this.loop);
@@ -133,6 +140,8 @@ class App1 extends React.Component {
 
   changeSession = () => {
     const { currentState, currentTime, scount, bcount, isPlaying, loop } = this.state;
+    var video = document.getElementById("myVideo");
+    video.pause();
 
     clearInterval(this.loop);
     this.setState({
@@ -210,7 +219,7 @@ class App1 extends React.Component {
 
     return (
       <div className="pomodoro-container">
-        <video autoPlay
+        <video
           loop
           muted
           id="myVideo">
