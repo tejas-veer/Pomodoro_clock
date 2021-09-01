@@ -19,6 +19,10 @@ class App1 extends React.Component {
     loop: undefined
   }
 
+  componentWillUnmount() {
+    clearInterval(this.loop);
+  }
+
   decreaseBreak = () => {
     const { bcount, currentState, currentTime, isPlaying } = this.state;
 
@@ -176,6 +180,12 @@ class App1 extends React.Component {
     return (currentState == 'Session') ? 'Take Break' : 'Take Session'
   }
 
+  changeColor = () => {
+    const { isPlaying } = this.state;
+    return (isPlaying) ? '{backgound-color : green}' : '{backgound-color : red}'
+  }
+
+
 
   render() {
     const { bcount,
@@ -199,7 +209,7 @@ class App1 extends React.Component {
     return (
       <div className="pomodoro-container">
         {/* <nav id="navbar"><span><img src="https://cdn.pixabay.com/photo/2017/11/10/13/32/clock-2936333_1280.png"></img></span>Focus Clock</nav> */}
-        <div className="clock-container" >
+        <div className="clock-container" style={{ background: this.state.isPlaying ? 'green' : 'red' }}>
           <h1>{currentState}</h1>
           <span>{this.convertToTime(currentTime)}</span>
         </div>
