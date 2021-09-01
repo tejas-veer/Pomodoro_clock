@@ -153,7 +153,10 @@ class App1 extends React.Component {
 
   reset = () => {
     const { currentState, currentTime, scount, bcount, isPlaying, loop } = this.state;
+    var video = document.getElementById("myVideo");
+    video.pause();
     document.body.style.backgroundColor = '#ff4757'
+
     clearInterval(this.loop);
     this.setState({
       currentState: 'Session',
