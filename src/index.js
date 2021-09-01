@@ -229,7 +229,7 @@ class App1 extends React.Component {
           <source src={bg} type="video/mp4" />
         </video>
         {/* <nav id="navbar"><span><img src="https://cdn.pixabay.com/photo/2017/11/10/13/32/clock-2936333_1280.png"></img></span>Focus Clock</nav> */}
-        <div className="clock-container" >
+        <div className="clock-container" style={{ border: (this.state.currentState == 'Session') ? '5px solid white' : '5px solid red' }}>
           <h1>{currentState}</h1>
           <span>{this.convertToTime(currentTime)}</span>
         </div>
