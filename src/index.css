@@ -162,7 +162,7 @@ button:hover {
     flex-direction: column;
     width: 300px;
     margin: 0 auto;
-    border-radius: 20px;
+    border: 0px;
     margin-bottom: 20px;
   }
 

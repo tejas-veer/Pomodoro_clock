@@ -181,13 +181,10 @@ class App1 extends React.Component {
 
   changeSessionName = () => {
     const { currentState } = this.state;
-    return (currentState == 'Session') ? 'Take Break' : 'Take Session'
+    return (currentState == 'Session') ? 'Switch To Break' : 'Switch To Session'
   }
 
-  changeColor = () => {
-    const { isPlaying } = this.state;
-    return (isPlaying) ? '{backgound-color : green}' : '{backgound-color : red}'
-  }
+
 
 
 
