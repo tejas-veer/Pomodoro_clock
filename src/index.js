@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import bg from "./bg.mp4";
+import click from "./click.wav";
+import buzz from "./buzzer.wav";
 
 class App1 extends React.Component {
 
@@ -17,7 +19,8 @@ class App1 extends React.Component {
     currentState: 'Session',
     currentTime: 45 * 60,
     isPlaying: false,
-    loop: undefined
+    loop: undefined,
+    isBuzz: false
   }
 
   componentWillUnmount() {
@@ -42,6 +45,31 @@ class App1 extends React.Component {
     }
 
   }
+
+  // increaseDecrease = (actionState, count) => {
+  //   const { isPlaying, currentState, currentTime, scount, bcount } = this.state;
+
+  //   let newCount;
+  //   if (actionState == 'Session') {
+  //     newCount = scount + count
+  //   }
+  //   else {
+  //     newCount = bcount + count
+  //   }
+
+
+  //   if (isPlaying == false && newCount > 0) {
+  //     if (actionState == 'Session') {
+  //       this.setState({
+  //         scount: newCount,
+  //         currentTime: newCount * 60
+  //       })
+  //     }
+
+
+  //   }
+
+  // }
 
   increaseBreak = () => {
     const { bcount, currentState, currentTime, isPlaying } = this.state;
@@ -99,6 +127,9 @@ class App1 extends React.Component {
   start = () => {
     const { isPlaying } = this.state;
 
+    const clickAudio = document.getElementsByClassName("clickAudio")[0]
+    clickAudio.play();
+
     var video = document.getElementById("myVideo");
     if (video.paused) {
       video.play();
@@ -119,7 +150,14 @@ class App1 extends React.Component {
       })
       document.body.style.backgroundColor = 'green'
       this.loop = setInterval(() => {
+
         const { currentTime, currentState, bcount, scount } = this.state;
+        const buzzAudio = document.getElementsByClassName("buzzAudio")[0]
+
+        if (bcount < 8 / 60) {
+          // buzzAudio.play();
+        }
+
         if (currentTime <= 0) {
           this.setState({
             currentState: (currentState == 'Session') ? 'Break' : 'Session',
@@ -222,12 +260,7 @@ class App1 extends React.Component {
 
     return (
       <div className="pomodoro-container">
-        <video
-          loop
-          muted
-          id="myVideo">
-          <source src={bg} type="video/mp4" />
-        </video>
+        <AudioVideo />
         {/* <nav id="navbar"><span><img src="https://cdn.pixabay.com/photo/2017/11/10/13/32/clock-2936333_1280.png"></img></span>Focus Clock</nav> */}
         <div className="clock-container" style={{ border: (this.state.currentState == 'Session') ? '5px solid white' : '5px solid red' }}>
           <h1>{currentState}</h1>
@@ -258,6 +291,24 @@ const SetTimer = (property) => (
     </div>
   </div>
 )
+
+const AudioVideo = () => (
+  <div>
+    <audio className="clickAudio">
+      <source src={click}></source>
+    </audio>
+    <audio className="buzzAudio">
+      <source src={buzz}></source>
+    </audio>
+    <video
+      loop
+      muted
+      id="myVideo">
+      <source src={bg} type="video/mp4" />
+    </video>
+  </div>
+)
+
 ReactDOM.render(
   <App1 />,
   document.getElementById('root')

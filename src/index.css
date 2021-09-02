@@ -87,6 +87,7 @@ body {
   text-align: center;
   border: 1px solid white;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .clock-container {
